@@ -12,6 +12,19 @@ export const generateAiInsights = async (weatherData) => {
         const { location, current, forecast } = weatherData;
         const dayForecast = forecast.forecastday[0].day;
 
+        // Parse local time information
+        const localTime = location.localtime;
+        const localTimeObj = new Date(localTime);
+        const hour = localTimeObj.getHours();
+
+        // Determine time of day
+        let timeOfDay = "day";
+        if (hour < 6) timeOfDay = "early morning";
+        else if (hour < 12) timeOfDay = "morning";
+        else if (hour < 17) timeOfDay = "afternoon";
+        else if (hour < 20) timeOfDay = "evening";
+        else timeOfDay = "night";
+
         const prompt = `
       You are a helpful AI weather assistant. Based on the following weather data for ${location.name}, ${location.country}, 
       provide personalized insights and recommendations in JSON format with these fields: 
@@ -29,6 +42,7 @@ export const generateAiInsights = async (weatherData) => {
       }
       
       Current Weather Data:
+      - Local Time: ${localTime} (${timeOfDay})
       - Temperature: ${current.temp_c}°C (feels like ${current.feelslike_c}°C)
       - Condition: ${current.condition.text}
       - Wind: ${current.wind_kph} km/h, ${current.wind_dir}
@@ -48,15 +62,20 @@ export const generateAiInsights = async (weatherData) => {
       - Sunrise: ${forecast.forecastday[0].astro.sunrise}
       - Sunset: ${forecast.forecastday[0].astro.sunset}
       
-      For each section:
-      - Health: Discuss respiratory conditions, allergy impacts, UV protection needs, hydration advice, etc.
-      - Travel: Consider road conditions, public transit impacts, airport delays, walking/cycling conditions
-      - Context: Compare to seasonal averages or recent trends
-      - Energy: Tips on heating/cooling usage, natural ventilation opportunities, etc.
-      - Photography: Discuss lighting conditions, visibility, scenic opportunities, best times for photos
-      - Mood: How this weather typically affects mood based on research, seasonal affective considerations
+      IMPORTANT: It is currently ${timeOfDay} (${localTime}) in ${location.name}. Make all recommendations appropriate for this time of day.
       
-      Make all recommendations practical and specific. Write in a friendly, conversational tone while being informative.
+      For each section:
+      - Health: Discuss respiratory conditions, allergy impacts, UV protection needs, hydration advice, etc. Adjust based on time of day.
+      - Travel: Consider road conditions, public transit impacts, time-of-day considerations, walking/cycling safety for current time.
+      - Context: Compare to seasonal averages or recent trends for this time of day.
+      - Energy: Tips on heating/cooling usage, natural ventilation opportunities based on current time.
+      - Photography: Discuss current lighting conditions based on time of day, night photography tips if after sunset.
+      - Mood: How this weather at this time of day typically affects mood based on research.
+      - Activities: Suggest appropriate activities for ${timeOfDay} considering the weather conditions.
+      
+      Make all recommendations practical and specific to the current time of day (${timeOfDay}). 
+      Write in a friendly, conversational tone while being informative.
+      Greet the user appropriately based on the time of day in ${location.name}.
       Only include the "alerts" field if there are legitimate weather concerns.
     `;
 
