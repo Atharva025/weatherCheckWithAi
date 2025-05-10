@@ -16,16 +16,16 @@ function SearchBar({ onSearch, onLocationRequest }) {
         <form onSubmit={handleSubmit} className="w-full max-w-2xl mx-auto">
             <div className="p-2 backdrop-blur-md bg-white/10 rounded-2xl shadow-lg flex flex-col sm:flex-row gap-3">
                 <div className="relative flex-1">
-                    <TbSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-blue-200 text-xl" />
+                    <TbSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-blue-300 text-xl" />
                     <input
                         type="text"
                         placeholder="Search for a city or location..."
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
-                        className="w-full pl-12 pr-4 py-4 rounded-xl bg-white/20 backdrop-blur-md border border-white/30 
+                        className="w-full pl-12 pr-4 py-4 rounded-xl bg-white/30 backdrop-blur-md border border-white/40 
                         focus:border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-300/50 
-                        text-white font-medium placeholder-blue-100 transition-all duration-300
-                        shadow-inner shadow-white/5"
+                        text-slate-800 font-semibold placeholder-slate-600 transition-all duration-300
+                        shadow-inner shadow-white/20"
                     />
                 </div>
                 <div className="flex gap-2">
