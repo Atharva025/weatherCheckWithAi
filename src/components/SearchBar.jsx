@@ -22,7 +22,10 @@ function SearchBar({ onSearch, onLocationRequest }) {
                         placeholder="Search for a city or location..."
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
-                        className="w-full pl-12 pr-4 py-4 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 focus:border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-300/50 text-white placeholder-blue-200/70 transition-all duration-300"
+                        className="w-full pl-12 pr-4 py-4 rounded-xl bg-white/20 backdrop-blur-md border border-white/30 
+                        focus:border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-300/50 
+                        text-white font-medium placeholder-blue-100 transition-all duration-300
+                        shadow-inner shadow-white/5"
                     />
                 </div>
                 <div className="flex gap-2">
