@@ -46,4 +46,4 @@ Weather Display with AI is a modern React application that combines real-time we
 - [Framer Motion](https://www.framer.com/motion/) for smooth animations  
 - [React Icons](https://react-icons.github.io/react-icons/) for the icon library
 
-- Developed with ❤️
+Developed with ❤️
